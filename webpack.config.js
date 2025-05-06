@@ -1,13 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  mode: 'development', // Use 'production' for builds
-  devtool: 'cheap-module-source-map', // Or 'source-map' for production
+  mode: 'production', // Or 'development' for easier debugging
+  devtool: 'cheap-module-source-map', // Recommended for extensions
   entry: {
-    content: './src/content.js',
     background: './src/background.js',
+    content: './src/content.js',
     options: './src/options.js',
   },
   output: {
@@ -39,30 +40,42 @@ module.exports = {
       filename: 'options.html',
       chunks: ['options'], // Only include the options bundle
     }),
-    new CopyWebpackPlugin({
+    new CopyPlugin({
       patterns: [
         { from: 'src/manifest.json', to: 'manifest.json' },
         { from: 'src/styles.css', to: 'styles.css' },
-        // Add any icons or other static assets here
-        // { from: 'public/icons', to: 'icons' },
+        { from: 'src/icons', to: 'icons' },
       ],
     }),
+    // Provide polyfills for Node.js core modules used by openai
+    new webpack.ProvidePlugin({
+        // process: ['process/browser'], // Remove from ProvidePlugin
+        Buffer: ['buffer', 'Buffer'],
+      }),
   ],
   resolve: {
     fallback: {
-      // Needed for openai library in browser environment (like background script)
       "stream": require.resolve("stream-browserify"),
-      "buffer": require.resolve("buffer/"),
+      "buffer": require.resolve("buffer/"), // Note the trailing slash
       "util": require.resolve("util/"),
+      "process": require.resolve("process/browser"), // Add back to fallback
       "url": require.resolve("url/"),
-      "http": require.resolve("stream-http"),
-      "https": require.resolve("https-browserify"),
       "os": require.resolve("os-browserify/browser"),
+      "https": require.resolve("https-browserify"),
+      "http": require.resolve("stream-http"),
       "assert": require.resolve("assert/"),
-      "zlib": require.resolve("browserify-zlib"),
       "path": require.resolve("path-browserify"),
-      "fs": false, // openai tries to read fs, but we don't need it in the browser
-      "crypto": require.resolve("crypto-browserify")
+      "fs": false, // fs cannot be polyfilled for browser
+      "zlib": require.resolve("browserify-zlib"),
+      "net": false, // net cannot be polyfilled
+      "tls": false, // tls cannot be polyfilled
+      "crypto": require.resolve("crypto-browserify"),
+      "constants": require.resolve("constants-browserify"),
+      "domain": require.resolve("domain-browser"),
+      "querystring": require.resolve("querystring-es3"),
+      "vm": require.resolve("vm-browserify"),
+      "tty": require.resolve("tty-browserify"),
+      "module": false,
     }
   },
 }; 
