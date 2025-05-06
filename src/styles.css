@@ -1,0 +1,205 @@
+/* Common class for easy selection/removal if needed */
+.gmail-ai-element {
+    /* Add specific styles below */
+    box-sizing: border-box;
+}
+
+/* Style for the main AI Write button */
+.gmail-ai-button {
+    background-color: #6c63ff; /* A modern purple */
+    color: white;
+    border: none;
+    padding: 0 16px; /* Adjust horizontal padding only */
+    height: 36px; /* Match typical Gmail button height (inspect to confirm exact value if needed) */
+    border-radius: 18px; /* Adjust for new height */
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    line-height: 36px; /* Match height for vertical centering of text */
+    /* Use inline-flex for better alignment potential */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Remove potentially conflicting styles */
+    /* vertical-align: middle; */
+    /* position: relative; */
+}
+
+/* Style for the button's container is removed - styles applied directly to cloned TD */
+/*
+.gmail-ai-button-container {
+    display: inline-block; 
+    vertical-align: middle; 
+    padding-left: 8px; 
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+}
+*/
+
+.gmail-ai-button:hover {
+    background-color: #574fd8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Style for the AI Panel */
+.gmail-ai-panel {
+    position: fixed; /* Use fixed positioning */
+    /* Default starting position near center */
+    top: calc(50vh - 150px); /* (Viewport Height / 2) - (Approx Panel Height / 2) */
+    left: calc(50vw - 150px); /* (Viewport Width / 2) - (Panel Width / 2) */
+    width: 300px;
+    max-height: calc(100vh - 60px); /* Adjust max height slightly */
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149); /* Google-style shadow */
+    z-index: 1001;
+    display: none; /* Initially hidden */
+    font-family: 'Roboto', Arial, sans-serif; /* Match Gmail font */
+    color: #3c4043; /* Google text color */
+}
+
+.gmail-ai-panel-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gmail-ai-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e8eaed; /* Lighter separator */
+    font-size: 16px; /* Slightly larger title */
+    font-weight: 500;
+    color: #202124; /* Darker header text */
+}
+
+.gmail-ai-close-button {
+    background: none;
+    border: none;
+    font-size: 24px; /* Slightly larger */
+    font-weight: 300;
+    cursor: pointer;
+    color: #5f6368; /* Google icon color */
+    padding: 0;
+    line-height: 1;
+}
+
+.gmail-ai-close-button:hover {
+    color: #202124;
+}
+
+.gmail-ai-panel textarea {
+    width: 100%;
+    min-height: 100px; /* Slightly taller */
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 12px;
+    font-size: 14px; /* Match compose font size better */
+    line-height: 1.4;
+    resize: vertical;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.gmail-ai-panel textarea:focus {
+    outline: none;
+    border-color: #1a73e8; /* Google blue focus */
+    box-shadow: 0 0 0 1px #1a73e8;
+}
+
+.gmail-ai-panel textarea:disabled {
+    background-color: #f1f3f4; /* Google disabled color */
+    color: #bdc1c6;
+}
+
+.gmail-ai-status {
+    font-size: 13px;
+    min-height: 1.5em;
+    margin-bottom: 12px;
+    text-align: left; /* Align status text left */
+    padding: 0 4px;
+    color: #5f6368; /* Default status color */
+}
+
+.gmail-ai-generate-button {
+    background-color: #1a73e8; /* Google blue */
+    color: white;
+    border: none;
+    padding: 9px 16px; /* Adjusted padding */
+    border-radius: 20px; /* Make it pill-shaped */
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    align-self: flex-end; /* Align to the right */
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149);
+    margin-left: 8px; /* Add space before generate button */
+}
+
+.gmail-ai-generate-button:hover {
+    background-color: #185abc; /* Darker blue */
+    box-shadow: 0 1px 3px 1px rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
+}
+
+.gmail-ai-generate-button:disabled {
+    background-color: #f1f3f4; /* Google disabled */
+    color: #bdc1c6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Container for footer buttons */
+.gmail-ai-panel-footer {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    /* Remove justify-content, let spacer work */
+}
+
+/* New subfooter for label */
+.gmail-ai-panel-subfooter {
+    text-align: right; /* Align label text to the right */
+    margin-top: 4px; /* Small space above label */
+}
+
+/* Style for shortcut label */
+.gmail-ai-shortcut-label {
+    font-size: 11px;
+    color: #5f6368;
+    /* Remove other layout styles, handled by parent */
+    /* text-align: right; */
+    /* margin: 0 8px; */
+    /* margin-right: auto; */
+}
+
+/* Spacer Div */
+.gmail-ai-footer-spacer {
+    flex-grow: 1; /* Takes up space between Clear and Label/Generate */
+}
+
+/* Style for the Clear History Button */
+.gmail-ai-clear-button {
+    background-color: transparent;
+    color: #5f6368;
+    border: 1px solid #dadce0;
+    padding: 8px 12px;
+    border-radius: 16px; /* Make pill-shaped */
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.gmail-ai-clear-button:hover {
+    background-color: #f1f3f4;
+    border-color: #c6c8ca;
+}
