@@ -21,22 +21,29 @@ This Chrome extension enhances your Gmail experience by integrating an AI assist
 
 ## Setup & Installation
 
-1.  **Clone or Download:** Get the extension code.
-2.  **Install Dependencies:** Navigate to the `gmail-ai-extension` directory in your terminal and run:
-    ```bash
-    npm install
-    ```
-3.  **Build the Extension:** Run the build command:
-    ```bash
-    npm run build
-    ```
-    This will create the necessary bundled files in the `gmail-ai-extension/dist` directory.
-4.  **Load into Chrome:**
-    - Open Chrome and navigate to `chrome://extensions/`.
-    - Enable "Developer mode" using the toggle switch in the top-right corner.
-    - Click the "Load unpacked" button.
-    - Select the `gmail-ai-extension/dist` directory.
-5.  **Configure:** Click the extension's icon in your Chrome toolbar to open the options page. Enter your API key and configure other settings as needed.
+### For Users:
+
+1. **Install from Chrome Web Store:** For a quick and easy setup, visit the [Gmail AI Assistant extension on the Chrome Web Store](https://chromewebstore.google.com/detail/gmail-ai-assistant/kpfahmlbfebaepelpgeggceongcmmchd) and click "Add to Chrome". This method allows you to install the extension directly without building from source.
+2. **Configure:** After installation, click the extension's icon in your Chrome toolbar to open the options page. Enter your API key and configure other settings as needed.
+
+### For Developers:
+
+1. **Clone or Download:** Get the extension code from the repository.
+2. **Install Dependencies:** Navigate to the `gmail-ai-extension` directory in your terminal and run:
+   ```bash
+   npm install
+   ```
+3. **Build the Extension:** Run the build command:
+   ```bash
+   npm run build
+   ```
+   This will create the necessary bundled files in the `gmail-ai-extension/dist` directory.
+4. **Load into Chrome:**
+   - Open Chrome and navigate to `chrome://extensions/`.
+   - Enable "Developer mode" using the toggle switch in the top-right corner.
+   - Click the "Load unpacked" button.
+   - Select the `gmail-ai-extension/dist` directory.
+5. **Configure:** Click the extension's icon in your Chrome toolbar to open the options page. Enter your API key and configure other settings as needed.
 
 ## Usage
 
